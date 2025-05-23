@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alice Mandalasi - Portfolio</title>
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #3b3c3e;
+            margin: 0;
+            padding: 0;
+        }
+        nav {
+            background-color: #434952;
+            color: white;
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 10;
+        }
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+        nav a {
+            color: white;
+            margin-left: 1rem;
+            text-decoration: none;
+        }
+        nav a:hover {
+            color: #d1d5db;
+        }
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            width: 24px;
+            height: 24px;
+        }
+        .close-icon {
+            display: none;
+            cursor: pointer;
+            width: 24px;
+            height: 24px;
+        }
+        .main-container {
+            padding-top: 5rem;
+        }
+        .page {
+            padding: 2rem 1rem;
+        }
+        .page-divider {
+            border-top: 2px solid #d1d5db;
+            margin: 1rem auto;
+            max-width: 1200px;
+        }
+        #home {
+            background-color: rgb(191, 194, 202);
+        }
+        #home .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: center;
+            gap: 1rem;
+        }
+        @media (min-width: 768px) {
+            #home .container {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+        }
+        #home img {
+            width: 100%;
+            max-width: 250px;
+            height: 16rem;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 4px solid white;
+            margin-right: 5%;
+        }
+        #home .text-content {
+            text-align: center;
+        }
+        @media (min-width: 768px) {
+            #home .text-content {
+                text-align: left;
+            }
+        }
+        #home h1 {
+            font-size: 2rem;
+            font-weight: bold;
+            color: royalblue;
+            margin-bottom: 0.5rem;
+        }
+        #home p {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        #home .social-links {
+            font-weight: bold;
+            color: #2563eb;
+            margin-bottom: 0.25rem;
+        }
+        #home .social-icons {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+        @media (min-width: 768px) {
+            #home .social-icons {
+                justify-content: flex-start;
+            }
+        }
+        #home .social-icons a img {
+            width: 1.5rem;
+            height: 1.5rem;
+            transition: transform 0.2s;
+        }
+        #home .social-icons a img:hover {
+            transform: scale(1.1);
+        }
+        #about, #experience, #contacts {
+            background-color: rgb(191, 194, 202);
+        }
+        #skills, #projects {
+            background-color: rgb(191, 194, 202);
+        }
+        h2 {
+            font-size: 2rem;
+            font-weight: bolder;
+            text-align: center;
+            color: royalblue;
+            margin-bottom: 1rem;
+        }
+        #about .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            height: auto;
+        }
+        #about .flex {
+            display: block;
+        }
+        #about .text-content {
+            width: 100%;
+            font-size: 1rem;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            box-sizing: border-box;
+        }
+        #skills .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #cacbd3;
+            padding: 1rem 0;
+            overflow: hidden;
+            border-radius: 16px;
+        }
+        #skills .skills-grid {
+            display: flex;
+            flex-wrap: nowrap;
+            white-space: nowrap;
+            animation: scroll 20s linear infinite;
+        }
+        #skills .skill-item {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #3a3e4d;
+            padding: 0.5rem 1rem;
+            margin: 0 0.5rem;
+            border-radius: 8px;
+            color: white;
+            font-size: 0.9rem;
+            min-width: 80px;
+            height: 80px;
+            transition: transform 0.2s;
+        }
+        #skills .skill-item i {
+            font-size: 24px;
+            margin-bottom: 0.25rem;
+        }
+        #skills .skill-item:hover {
+            transform: scale(1.1);
+        }
+        #skills .skill-item .fa-python {
+            color: #3776AB;
+        }
+        #skills .skill-item .fa-html5 {
+            color: #E34F26;
+        }
+        #skills .skill-item .fa-css3-alt {
+            color: #1572B6;
+        }
+        #skills .skill-item .fa-database.mysql {
+            color: #00758F;
+        }
+        #skills .skill-item .fa-database.postgresql {
+            color: #336791;
+        }
+        #skills .skill-item .fa-figma {
+            color: #F24E1E;
+        }
+        #skills .skill-item .fa-js {
+            color: #F7DF1E;
+        }
+        #skills .skill-item .fa-java {
+            color: #007396;
+        }
+        #skills .skill-item .fa-leaf.django {
+            color: #092E20;
+        }
+        #skills .skill-item .fa-leaf.laravel {
+            color: #FF2D20;
+        }
+        #skills .skill-item .fa-cloud {
+            color: #FF9900;
+        }
+        #skills .skill-item .fa-node-js {
+            color: #339933;
+        }
+        #skills .skill-item .fa-github {
+            color: #181717;
+        }
+        #skills .skill-item .fa-paper-plane {
+            color: #FF6C37;
+        }
+        #skills .skill-item .fa-bed {
+            color: #900C3F;
+        }
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        #experience .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        #experience .cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        #experience .card {
+            background-color: #cacbd3;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+        #experience .card h3 {
+            font-weight: bold;
+            margin-bottom: 0.25rem;
+        }
+        #contacts .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            padding: 2rem;
+            background-color: #1a1f26;
+            border-radius: 10px;
+            color: white;
+        }
+        @media (min-width: 768px) {
+            #contacts .container {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+        }
+        #contacts h2 {
+            color: #ff3366;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        #contacts .contact-info p {
+            margin: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            font-size: 1rem;
+        }
+        #contacts .contact-info .contact-icon-card {
+            background-color: #49494d;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+        }
+        #contacts .contact-info .contact-icon-card i {
+            font-size: 30px;
+        }
+        #contacts .contact-info .contact-text {
+            display: inline;
+            margin-left: 1rem;
+        }
+        #contacts .contact-info .contact-text span:first-child {
+            font-weight: bold;
+            display: inline;
+        }
+        #contacts .contact-info .contact-text span:last-child {
+            display: inline;
+        }
+        #contacts .contact-info .fa-map-marker-alt {
+            color: #ff3366;
+        }
+        #contacts consecrated .contact-info .fa-envelope {
+            color: #9b7eac;
+        }
+        #contacts .contact-info .fa-phone {
+            color: #34d399;
+        }
+        #contacts .contact-form {
+            background-color: #36363a;
+            padding: 1.5rem;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 500px;
+            color: #f7ecec;
+        }
+        #contacts .contact-form input,
+        #contacts .contact-form textarea,
+        #contacts .contact-form select {
+            width: 100%;
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            border: 1px solid #d1d5db;
+            border-radius: 5px;
+            box-sizing: border-box;
+            background-color: #f7ecec;
+            color: #1a1f26;
+        }
+        #contacts .contact-form textarea {
+            height: 100px;
+            resize: none;
+        }
+        #contacts .contact-form .radio-group {
+            display: flex;
+            gap: 1rem;
+            margin: 0.5rem 0;
+            color: #f7ecec;
+            align-items: center;
+        }
+        #contacts .contact-form button {
+            background-color: transparent;
+            color: #ff3366;
+            border: 2px solid #ff3366;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            width: auto;
+            height: auto;
+            margin: 0;
+            font-weight: bold;
+        }
+        #contacts .contact-form button:hover {
+            background-color: #ff3366;
+            color: white;
+        }
+        #contacts .contact-form .form-message {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+        #contacts .contact-form .form-message.success {
+            color: green;
+        }
+        #contacts .contact-form .form-message.error {
+            color: red;
+        }
+        .projects-grid {
+            display: grid;
+            gap: 0.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .projects-grid .card {
+            display: flex;
+            background-color: #cacbd3;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            align-items: center;
+        }
+        .projects-grid .card .text-content {
+            flex: 1;
+            padding-right: 1rem;
+        }
+        .projects-grid .card img {
+            max-width: 200px;
+            height: auto;
+            border-radius: 0.5rem;
+            object-fit: cover;
+        }
+        .projects-grid h3 {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 0.25rem;
+        }
+        footer {
+            background-color: #1f2937;
+            color: white;
+            padding: 0.5rem;
+            text-align: center;
+        }
+        @media (max-width: 767px) {
+            .hamburger {
+                display: block;
+            }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: #434952;
+                flex-direction: column;
+                padding: 1rem;
+                z-index: 9;
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .nav-links.active .hamburger {
+                display: none;
+            }
+            .nav-links.active .close-icon {
+                display: block;
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+            }
+            nav a {
+                margin: 0.5rem 0;
+                margin-left: 0;
+            }
+            #home .container {
+                padding: 0 0.5rem;
+            }
+            #about .flex {
+                flex-direction: column;
+            }
+            #about .text-content {
+                width: 100%;
+                margin-top: 0.5rem;
+                margin-bottom: 0.5rem;
+            }
+            #skills .skills-grid {
+                animation: scroll 10s linear infinite;
+            }
+            #skills .skill-item {
+                min-width: 70px;
+                height: 70px;
+                padding: 0.3rem 0.8rem;
+            }
+            #skills .skill-item i {
+                font-size: 20px;
+            }
+            #experience .cards {
+                grid-template-columns: 1fr;
+            }
+            .projects-grid .card {
+                flex-direction: column;
+            }
+            .projects-grid .card img {
+                max-width: 100%;
+                margin-top: 1rem;
+            }
+            #contacts .container {
+                padding: 1rem;
+            }
+            #contacts .contact-form {
+                padding: 0.2rem;
+            }
+            #contacts .contact-info .contact-icon-card {
+                width: 40px;
+                height: 40px;
+            }
+            #contacts .contact-info .contact-icon-card i {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="container">
+            <div>Alice Mandalasi</div>
+            <div class="nav-links">
+                <svg class="close-icon" viewBox="0 0 24 24" fill="white">
+                    <path d="M18 6L6 18M6 6l12 12" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#experience">Experience</a>
+                <a href="#projects">Projects</a>
+                <a href="#contacts">Contacts</a>
+            </div>
+            <svg class="hamburger" viewBox="0 0 24 24" fill="none">
+                <path d="M4 6h16M4 12h16M4 18h16" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Home Page -->
+        <div id="home" class="page">
+            <div class="container">
+                <img src="alice.jpg" alt="Alice Mandalasi professional photo">
+                <div class="text-content">
+                    <h1>Hi, I'm Alice Mandalasi</h1>
+                    <h3>UI/UX Designer and Software Developer</h3>
+                    <p>
+                        I'm from Blantyre, Malawi, with solid experience in building complex systems using modern technology.
+                        Feel free to browse my portfolio, check out my CV, or reach out through the contact page. I’m always open to new opportunities!
+                    </p>
+                    <p class="social-links">Social Media Links</p>
+                    <p>You can connect with me on:</p>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/alicec.mandalasi" target="_blank" aria-label="Facebook" rel="noopener noreferrer">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/facebook.svg" alt="Facebook Icon" width="32" height="32">
+                        </a>
+                        <a href="https://www.linkedin.com/in/alice-mandalasi-62604135a" target="_blank" aria-label="LinkedIn" rel="noopener noreferrer">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/linkedin.svg" alt="LinkedIn Icon" width="32" height="32">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-divider"></div>
+
+        <!-- About Page -->
+        <div id="about" class="page">
+            <div class="container">
+                <h2>About Me</h2>
+                <div class="flex">
+                    <div class="text-content">
+                        <p class="text-lg mb-2">I'm Alice Mandalasi, a passionate full-stack developer and UI/UX designer with a strong foundation in building and designing web applications that are not only functional but also visually engaging and user-friendly.</p>
+                        <p class="text-lg mb-2">I hold a Bachelor of Science in Information Technology from Malawi University of Business and Applied Sciences.</p>
+                        <p class="text-lg mb-2">On the development side, I work with technologies like HTML, CSS, JavaScript, Node.js, Django, Laravel, and Java, alongside databases like MySQL, PostgreSQL, and MongoDB.</p>
+                        <p class="text-lg mb-2">As a UI/UX designer, I focus on creating intuitive and accessible user experiences using tools like Figma.</p>
+                        <p class="text-lg">I'm always eager to take on new challenges, learn new technologies, and collaborate on meaningful projects.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-divider"></div>
+
+        <!-- Skills Page -->
+        <div id="skills" class="page">
+            <div class="container">
+                <h2>Skills</h2>
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <i class="fas fa-database mysql"></i>
+                        <span>MySQL</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fas fa-database postgresql"></i>
+                        <span>PostgreSQL</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fab fa-html5"></i>
+                        <span>HTML</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fab fa-css3-alt"></i>
+                        <span>CSS</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fab fa-figma"></i>
+                        <span>Figma</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fab fa-js"></i>
+                        <span>JavaScript</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fab fa-python"></i>
+                        <span>Python</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fab fa-java"></i>
+                        <span>Java</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fas fa-leaf django"></i>
+                        <span>Django</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fas fa-leaf laravel"></i>
+                        <span>Laravel</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fas fa-cloud"></i>
+                        <span>AWS</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fab fa-node-js"></i>
+                        <span>Node.js</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fab fa-github"></i>
+                        <span>GitHub</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fas fa-paper-plane"></i>
+                        <span>Postman</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fas fa-bed"></i>
+                        <span>Insomnia</span>
+                    </div>
+                    <!-- Duplicate set for infinite scrolling -->
+                    <div class="skill-item">
+                        <i class="fas fa-database mysql"></i>
+                        <span>MySQL</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fas fa-database postgresql"></i>
+                        <span>PostgreSQL</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fab fa-html5"></i>
+                        <span>HTML</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fab fa-css3-alt"></i>
+                        <span>CSS</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fab fa-figma"></i>
+                        <span>Figma</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fab fa-js"></i>
+                        <span>JavaScript</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fab fa-python"></i>
+                        <span>Python</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fab fa-java"></i>
+                        <span>Java</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fas fa-leaf django"></i>
+                        <span>Django</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fas fa-leaf laravel"></i>
+                        <span>Laravel</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fas fa-cloud"></i>
+                        <span>AWS</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fab fa-node-js"></i>
+                        <span>Node.js</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fab fa-github"></i>
+                        <span>GitHub</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fas fa-paper-plane"></i>
+                        <span>Postman</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fas fa-bed"></i>
+                        <span>Insomnia</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-divider"></div>
+
+        <!-- Experience Page -->
+        <div id="experience" class="page">
+            <div class="container text-center">
+                <h2>Experience</h2>
+                <div class="cards">
+                    <div class="card">
+                        <h3>Software Developer – IMOSYS Company (Dec 2024 – Present)</h3>
+                        <p>Designing and developing web applications from frontend to backend, ensuring secure architecture, performance, and usability.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Electronics Education Assistant – Techpearl (Nov 2023 – Feb 2024)</h3>
+                        <p>Introduced basic electronics to learners through hands-on sessions and supported practical circuit-building activities.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Technical Support Specialist – Dazzle Credit Technologies (Jan 2024 – Oct 2024)</h3>
+                        <p>Provided software and hardware support services, resolved technical issues, and maintained smooth system operations.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Financial Inclusion Surveyor – Primelux Group (July 2024)</h3>
+                        <p>Collected and analyzed community-level data on access to financial services to inform inclusion strategies.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-divider"></div>
+
+        <!-- Projects Page -->
+        <div id="projects" class="page">
+            <div class="container">
+                <h2>Featured and Personal Projects</h2>
+                <div class="projects-grid max-w-4xl mx-auto text-left text-lg">
+                    <div class="card">
+                        <div class="text-content">
+                            <h3>Mibawa Project</h3>
+                            <p>Contributed to both the <strong>frontend</strong> and <strong>backend</strong> of a complete web application. Involved in UI development, API integration, and overall functionality enhancements.</p>
+                        </div>
+                        <img src="MIBAWA.png" alt="Mibawa Project Screenshot">
+                    </div>
+                    <div class="card">
+                        <div class="text-content">
+                            <h3>Alonda Project</h3>
+                            <p>Served as a <strong>backend developer</strong> responsible for building APIs and implementing business logic to support frontend operations and system processes.</p>
+                        </div>
+                        <img src="alonda.png" alt="Alonda Project Screenshot">
+                    </div>
+                    <div class="card">
+                        <div class="text-content">
+                            <h3>Old Mutual Project</h3>
+                            <p>Worked on both <strong>backend development</strong> and <strong>UI/UX design</strong>.</p>
+                        </div>
+                        <img src="UI.png" alt="Old Mutual Project Screenshot" style="width: 500px; height: 100px;">
+                    </div>
+                    <div class="card">
+                        <div class="text-content">
+                            <h3>File Organizer (Personal Project)</h3>
+                            <p>A desktop tool developed in Python to automatically organize files into folders based on their types. Designed to boost digital organization and productivity.</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="text-content">
+                            <h3>Student Management Information System (SMIS: Personal Project)</h3>
+                            <p>An ongoing full-stack project for secondary schools to manage student information, academic records, and communication workflows. Built with a clean UI and a scalable backend architecture.</p>
+                        </div>
+                        <img src="SMIS.png" alt="SMIS Screenshot">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-divider"></div>
+
+        <!-- Contacts Page -->
+        <div id="contacts" class="page">
+            <div class="container">
+                <div class="contact-info">
+                    <h2>Get in Touch</h2>
+                    <p>Feel free to reach out! Whether you have a question or just want to drop a message, I’ll do my best to get back to you.</p>
+                    <p>
+                        <div class="contact-icon-card">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <span>Location</span> <span>Blantyre, Malawi</span>
+                        </div>
+                    </p>
+                    <p>
+                        <div class="contact-icon-card">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">
+                            <span>Email</span> <span>alicemandalasi@gmail.com</span>
+                        </div>
+                    </p>
+                    <p>
+                        <div class="contact-icon-card">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-text">
+                            <span>Phone</span> <span>+265 990 734 016 (+265 884 331 488 WhatsApp)</span>
+                        </div>
+                    </p>
+                </div>
+                <div class="contact-form">
+                    <div id="form-message" class="form-message"></div>
+                    <input type="text" name="name" placeholder="Your Name" required>
+                    <div style="display: flex; gap: 1rem;">
+                        <input type="text" name="phone" placeholder="Phone Number" required style="flex: 1;">
+                        <input type="email" name="email" placeholder="Email Address" required style="flex: 1;">
+                    </div>
+                    <select name="subject" required>
+                        <option value="" disabled selected>Select Subject</option>
+                        <option value="project">Project Inquiry</option>
+                        <option value="collaboration">Collaboration</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <div style="margin: 0.5rem 0;">Preferred Contact Method</div>
+                    <div class="radio-group">
+                        <input type="radio" name="contact-method" value="phone" required> <label>Phone</label>
+                        <input type="radio" name="contact-method" value="email"> <label>Email</label>
+                    </div>
+                    <div style="margin: 0.5rem 0;">How did you hear about me?</div>
+                    <input type="text" name="referral" placeholder="Friends, Social Media, etc.">
+                    <textarea name="message" placeholder="Your Project Idea..."></textarea>
+                    <button type="button" onclick="sendMessage()">Send Message</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2024 Alice Mandalasi. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Initialize EmailJS with your public key
+        (function() {
+            emailjs.init("35KsI2pdMWmkChEY_"); // Replace with your EmailJS public key
+        })();
+
+        // Function to send the message
+        function sendMessage() {
+            const formMessage = document.getElementById('form-message');
+            formMessage.textContent = 'Sending...';
+            formMessage.className = 'form-message';
+
+            // Collect form data
+            const name = document.querySelector('input[name="name"]').value;
+            const phone = document.querySelector('input[name="phone"]').value;
+            const email = document.querySelector('input[name="email"]').value;
+            const subject = document.querySelector('select[name="subject"]').value;
+            const contactMethod = document.querySelector('input[name="contact-method"]:checked').value;
+            const referral = document.querySelector('input[name="referral"]').value;
+            const message = document.querySelector('textarea[name="message"]').value;
+
+            // Prepare the email parameters
+            const templateParams = {
+                name: name,
+                phone: phone,
+                email: email,
+                subject: subject,
+                contact_method: contactMethod,
+                referral: referral,
+                message: message,
+                to_email: 'alicemandalasi@gmail.com'
+            };
+
+            // Send the email using EmailJS
+            emailjs.send('service_ypvjbnl', 'template_m9jzqwf', templateParams)
+                .then(() => {
+                    // Show success message
+                    formMessage.textContent = 'Message sent successfully!';
+                    formMessage.className = 'form-message success';
+                    // Reset the form immediately
+                    document.querySelector('.contact-form').reset();
+                    // Clear the success message after 2.5 seconds and refresh the page
+                    setTimeout(() => {
+                        formMessage.textContent = '';
+                        formMessage.className = 'form-message';
+                        // Refresh the page to ensure all information is cleared
+                        window.location.reload();
+                    }, 2500);
+                }, (error) => {
+                    formMessage.textContent = 'Failed to send message. Please try again.';
+                    formMessage.className = 'form-message error';
+                    console.error('EmailJS error:', error);
+                });
+        }
+
+        // Navigation scripts
+        const hamburger = document.querySelector('.hamburger');
+        const closeIcon = document.querySelector('.close-icon');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        closeIcon.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+        });
+
+        const navItems = document.querySelectorAll('.nav-links a');
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+    </script>
+</html>
